@@ -20,9 +20,20 @@ namespace SouboryBin04
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(openFileDialog1.ShowDialog()==DialogResult.OK)
-            {
-                FileStream fs = new FileStream(openFileDialog1.FileName, FileMode.Open,FileAccess.Read);
+                FileStream fs1 = new FileStream("pomocnik.dat", FileMode.OpenOrCreate, FileAccess.Write);
+                BinaryWriter bw = new BinaryWriter(fs1);
+                bw.Write('A');
+                bw.Write('C');
+            bw.Write('1');
+            bw.Write('*');
+            bw.Write('-');
+            bw.Write('.');
+            bw.Write('F');
+
+
+            fs1.Close();
+
+                FileStream fs = new FileStream("pomocnik.dat", FileMode.Open,FileAccess.Read);
                 BinaryReader br = new BinaryReader(fs);
                 int pcPismen = 0;
                 int pcCisel=0;
@@ -30,11 +41,29 @@ namespace SouboryBin04
                 int pcZnakuKonceVety = 0;
                 while(fs.Position<fs.Length)
                 {
-                    int kod = br.ReadInt32();
-                    MessageBox.Show("" + (char)kod);
+                    char kod = br.ReadChar();
+                if (kod >= 'A' && kod <= 'Z')
+                {
+                    pcPismen++;
                 }
-
-            }
+                else if (kod >= 'a' && kod <= 'z')
+                {
+                    pcPismen++;
+                }
+                else if (kod >= '0' && kod <= '9')
+                {
+                    pcCisel++;
+                }
+                else if (kod == '+' | kod == '-' | kod == '*' | kod == '/')
+                {
+                    pcOperatoru++;
+                }
+                else if (kod == '.' | kod == '?' | kod == '!' | kod == ':')
+                {
+                    pcZnakuKonceVety++;
+                }
+                }
+            MessageBox.Show("Počet písmen: " + pcPismen + "\nPočet čísel: " + pcCisel + "\nPočet operátorů: " + pcOperatoru + "\nPočet znaků" + pcZnakuKonceVety);
         }
     }
 }
