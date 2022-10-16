@@ -22,14 +22,16 @@ namespace SouboryBin04
         {
             if(openFileDialog1.ShowDialog()==DialogResult.OK)
             {
-                FileStream fs = new FileStream(openFileDialog1.FileName, FileMode.Open,FileAccess.ReadWrite);
+                FileStream fs = new FileStream(openFileDialog1.FileName, FileMode.Open,FileAccess.Read);
                 BinaryReader br = new BinaryReader(fs);
-                double[] pole;
-                int i = 0;
+                int pcPismen = 0;
+                int pcCisel=0;
+                int pcOperatoru = 0;
+                int pcZnakuKonceVety = 0;
                 while(fs.Position<fs.Length)
                 {
-                    double cislo = br.ReadDouble();
-                    
+                    int kod = br.ReadInt32();
+                    MessageBox.Show("" + (char)kod);
                 }
 
             }
