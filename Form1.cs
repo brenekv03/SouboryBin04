@@ -24,6 +24,13 @@ namespace SouboryBin04
             {
                 FileStream fs = new FileStream(openFileDialog1.FileName, FileMode.Open,FileAccess.ReadWrite);
                 BinaryReader br = new BinaryReader(fs);
+                double[] pole;
+                int i = 0;
+                while(fs.Position<fs.Length)
+                {
+                    double cislo = br.ReadDouble();
+                    
+                }
 
             }
         }
